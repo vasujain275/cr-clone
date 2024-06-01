@@ -1,5 +1,6 @@
 <script>
   import AnimeCard from "./AnimeCard.svelte";
+  var mediaArray = [];
   var query = `
 query($year: Int, $season: MediaSeason) {
   Page(page: 1, perPage: 25) {
@@ -64,7 +65,7 @@ query($year: Int, $season: MediaSeason) {
   }
 
   function handleData(data) {
-    console.log(data);
+    mediaArray = data.data.Page.media;
   }
 
   function handleError(error) {
@@ -76,8 +77,8 @@ query($year: Int, $season: MediaSeason) {
 <h2
   class="text-[28px] leading-[36px] text-left tracking-normal text-white mr-20 ml-20 mt-5 px-2 py-2"
 >
-  {seasonUpper}
-  {currentYear} Simulcasts
+  Trending {seasonUpper}
+  {currentYear}
 </h2>
 
 <p
@@ -87,15 +88,10 @@ query($year: Int, $season: MediaSeason) {
 </p>
 
 <div class="mt-4 ml-20 mr-20 grid sm:grid-cols-5 gap-5">
-  <AnimeCard />
-  <AnimeCard />
-  <AnimeCard />
-  <AnimeCard />
-  <AnimeCard />
-  <AnimeCard />
-  <AnimeCard />
-  <AnimeCard />
-  <AnimeCard />
-  <AnimeCard />
-  <AnimeCard />
+  {#each mediaArray as anime}
+    <AnimeCard
+      coverImage={anime.coverImage.extraLarge}
+      animeName={anime.title.english || anime.title.romaji}
+    />
+  {/each}
 </div>
