@@ -1,4 +1,5 @@
 <script>
+  import AnimeCard from "./AnimeCard.svelte";
   var query = `
 query($year: Int, $season: MediaSeason) {
   Page(page: 1, perPage: 25) {
@@ -9,7 +10,7 @@ query($year: Int, $season: MediaSeason) {
         english
       }
       coverImage {
-        large
+        extraLarge
       }
     }
   }
@@ -31,6 +32,8 @@ query($year: Int, $season: MediaSeason) {
   } else {
     season = "FALL";
   }
+
+  let seasonUpper = season.charAt(0) + season.toLowerCase().slice(1);
 
   var variables = {
     year: currentYear,
@@ -69,3 +72,30 @@ query($year: Int, $season: MediaSeason) {
     console.error(error);
   }
 </script>
+
+<h2
+  class="text-[28px] leading-[36px] text-left tracking-normal text-white mr-20 ml-20 mt-5 px-2 py-2"
+>
+  {seasonUpper}
+  {currentYear} Simulcasts
+</h2>
+
+<p
+  class="text-[16px] leading-[24px] text left tracking-normal text-[#a0a0a0] mr-20 ml-20 mt-2 px-2 py-2"
+>
+  Find the best new and countinuing simulcasts here!
+</p>
+
+<div class="mt-4 ml-20 mr-20 grid sm:grid-cols-5 gap-5">
+  <AnimeCard />
+  <AnimeCard />
+  <AnimeCard />
+  <AnimeCard />
+  <AnimeCard />
+  <AnimeCard />
+  <AnimeCard />
+  <AnimeCard />
+  <AnimeCard />
+  <AnimeCard />
+  <AnimeCard />
+</div>

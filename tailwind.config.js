@@ -8,6 +8,9 @@ export default {
         pri: "#000000",
         offwhite: "#d1cdc7",
       },
+      fontFamily: {
+        'typeface': ['Lato', '"Helvetica Neue"', 'helvetica', 'sans-serif'],
+      },
     },
   },
   plugins: [],
